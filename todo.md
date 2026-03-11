@@ -70,3 +70,10 @@
 - [x] Criar componente ProgressBar com animações
 - [x] Integrar progresso no QueryDetails
 - [x] Testar SSE com múltiplos downloads simultâneos
+
+
+## Fase 11: Correção de Bugs
+- [x] Corrigir apresentação do botão "Certificados" na Home
+- [x] Corrigir página Certificates.tsx não sendo exibida
+- [x] Validar navegação entre páginas
+- [x] Testar responsividade em mobile
