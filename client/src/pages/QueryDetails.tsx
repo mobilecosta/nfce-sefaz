@@ -3,6 +3,9 @@ import { useLocation, useRoute } from 'wouter';
 import { trpc } from '@/lib/trpc';
 import { toast } from 'sonner';
 import { Checkbox } from '@/components/ui/checkbox';
+import { DownloadProgressBar } from '@/components/DownloadProgressBar';
+import { useDownloadProgress } from '@/hooks/useDownloadProgress';
+import { useAuth } from '@/_core/hooks/useAuth';
 
 export default function QueryDetails() {
   const [, navigate] = useLocation();
@@ -12,6 +15,14 @@ export default function QueryDetails() {
   const [selectedKeys, setSelectedKeys] = useState<Set<number>>(new Set());
   const [selectAll, setSelectAll] = useState(false);
   const [isDownloading, setIsDownloading] = useState(false);
+  const [sessionId, setSessionId] = useState<string | null>(null);
+  const { user } = useAuth();
+
+  const { progress, isConnected, error, cancel } = useDownloadProgress({
+    sessionId: sessionId || '',
+    userId: user?.id || 0,
+    enabled: !!sessionId && !!user,
+  });
 
   const { data: queryInfo, isLoading } = trpc.batch.getBatchInfo.useQuery(
     { queryId: queryId || 0 },
@@ -64,6 +75,10 @@ export default function QueryDetails() {
 
     setIsDownloading(true);
     try {
+      // Gerar sessionId único
+      const newSessionId = `${queryId}-${Date.now()}-${Math.random().toString(36).substr(2, 9)}`;
+      setSessionId(newSessionId);
+
       const result = await downloadMutation.mutateAsync({
         queryId,
         accessKeyIds: Array.from(selectedKeys),
@@ -78,9 +93,9 @@ export default function QueryDetails() {
       document.body.removeChild(link);
 
       toast.success(`Download iniciado: ${result.totalFiles} arquivos`);
-      setSelectedKeys(new Set());
     } catch (error) {
       toast.error('Erro ao iniciar download em lote');
+      setSessionId(null);
     } finally {
       setIsDownloading(false);
     }
@@ -121,6 +136,18 @@ export default function QueryDetails() {
           </div>
         ) : queryInfo ? (
           <>
+            {/* Progress Bar */}
+            {progress && (
+              <section className="space-y-6">
+                <DownloadProgressBar
+                  progress={progress}
+                  isConnected={isConnected}
+                  error={error}
+                  onCancel={cancel}
+                />
+              </section>
+            )}
+
             {/* Query Info */}
             <section className="space-y-6">
               <div className="card-brutal space-y-4">
