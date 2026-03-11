@@ -7,6 +7,7 @@ import { ThemeProvider } from "./contexts/ThemeContext";
 import Home from "./pages/Home";
 import Certificates from "./pages/Certificates";
 import Query from "./pages/Query";
+import QueryDetails from "./pages/QueryDetails";
 import Admin from "./pages/Admin";
 
 function Router() {
@@ -16,6 +17,7 @@ function Router() {
       <Route path="" component={Home} />
       <Route path="/certificates" component={Certificates} />
       <Route path="/query" component={Query} />
+      <Route path="/query/:id" component={QueryDetails} />
       <Route path="/admin" component={Admin} />
       <Route path="/404" component={NotFound} />
       {/* Final fallback route */}

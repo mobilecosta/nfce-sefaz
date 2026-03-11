@@ -146,12 +146,22 @@ export default function Query() {
                         </p>
                       )}
                     </div>
-                    <button
-                      onClick={() => navigate(`/query/${query.id}`)}
-                      className="btn-brutal-outline text-sm px-4 py-2"
-                    >
-                      DETALHES
-                    </button>
+                    <div className="flex gap-2">
+                      <button
+                        onClick={() => navigate(`/query/${query.id}`)}
+                        className="btn-brutal-outline text-sm px-4 py-2 flex-1"
+                      >
+                        DETALHES
+                      </button>
+                      {query.totalKeysFound && query.totalKeysFound > 0 && (
+                        <button
+                          onClick={() => navigate(`/query/${query.id}`)}
+                          className="btn-brutal text-sm px-4 py-2 flex-1"
+                        >
+                          DOWNLOAD
+                        </button>
+                      )}
+                    </div>
                   </div>
                 </div>
               ))}

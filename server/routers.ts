@@ -7,6 +7,7 @@ import * as db from "./db";
 import { storagePut, storageGet } from "./storage";
 import { SefazClient } from "./sefazClient";
 import { TRPCError } from "@trpc/server";
+import { batchRouter } from "./routers-batch";
 
 export const appRouter = router({
   system: systemRouter,
@@ -265,6 +266,9 @@ export const appRouter = router({
         }
       }),
   }),
+
+  // Batch download operations
+  batch: batchRouter,
 
   // Admin operations
   admin: router({

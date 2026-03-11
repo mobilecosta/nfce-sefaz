@@ -52,3 +52,12 @@
 - [ ] Testar painel administrativo
 - [ ] Criar documentação de uso
 - [ ] Preparar checkpoint final
+
+
+## Fase 9: Download em Lote
+- [x] Instalar dependência archiver para criação de ZIP
+- [x] Implementar procedure tRPC para download em lote
+- [x] Criar página de detalhes de consulta com seleção múltipla
+- [x] Implementar gerenciamento de progresso de download
+- [x] Testar download em lote com múltiplos XMLs
+- [x] Validar integridade dos arquivos ZIP
