@@ -77,3 +77,13 @@
 - [x] Corrigir página Certificates.tsx não sendo exibida
 - [x] Validar navegação entre páginas
 - [x] Testar responsividade em mobile
+
+
+## Fase 12: Preparação para Vercel
+- [x] Criar arquivo vercel.json com configurações de build e rotas
+- [x] Otimizar package.json para produção
+- [x] Configurar variáveis de ambiente para Vercel
+- [x] Testar build de produção localmente
+- [x] Documentar processo de deploy na Vercel
+- [x] Configurar domínio customizado (opcional)
+- [x] Criar checkpoint final para publicação
